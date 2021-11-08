@@ -1,0 +1,41 @@
+.container {  padding-top:10px; padding-bottom:10px; background-color: white; border-radius: 10px;}
+.rounded { width:100px}
+.img-thumbnail { width:80px!important}
+body{
+    background-image: url("img/grad.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	padding-bottom: 50px;
+	
+}
+#overlay {
+    background: #ffffff;
+    color: #666666;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 5000;
+    top: 0;
+    left: 0;
+    float: left;
+    text-align: center;
+    padding-top: 25%;
+    opacity: .80;
+  }
+
+  .link{
+    color:white; 
+    background-color: rgb(32, 123, 241); 
+    margin-right: 10px;
+    padding: 9px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .link:hover{
+      background-color: red;
+      color:white;
+      text-decoration: none;
+  }

@@ -112,9 +112,9 @@ form.sign-in-form {
   justify-content: center;
 }
 
-.social-icon {
-  height: 46px;
-  width: 46px;
+.social-icon{
+  height: 50px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -398,3 +398,32 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+.container.brends {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  width: 90%;
+  margin-left: 80px;
+}
+
+.container.brends img {
+  width: 35px;
+  height: 35px;
+  transform-origin: center;
+  transform: perspective(800px) rotateY(20deg);
+  transition: 0.5s;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0004);
+}
+
+.container.brends:hover img {
+  opacity: 0.1;
+}
+
+.container.brends img:hover {
+  transform: perspective(100px) rotateY(20deg);
+  opacity: 1;
+}
+

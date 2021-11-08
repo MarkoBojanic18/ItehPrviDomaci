@@ -59,7 +59,7 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
       $_SESSION["user_id"] = $row['id'];
       header("Location: welcome.php");
     }else{
-      echo "<script>alert('Login details is incorrect. Please try again');</script>";
+      echo "<script>alert('Login details are incorrect. Please try again');</script>";
     }
 }
 
@@ -79,6 +79,7 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
 <body>
     <div class="container">
         <div class="forms-container">
+
             <div class="signin-signup">
 
                 <!-- sign in form -->
@@ -140,6 +141,7 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
                     <input type="submit" class="btn solid" name="signup" value="Sign up" />
                     <p class="social-text">Or Sign up with social platforms</p>
                     <div class="social-media">
+
                         <a href="#" class="social-icon">
                             <i class="fab fa-facebook-f"></i>
                         </a>
@@ -152,7 +154,9 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
                         <a href="#" class="social-icon">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
+
                     </div>
+
                 </form>
             </div>
         </div>
@@ -160,6 +164,7 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
         <div class="panels-container">
             <div class="panel left-panel">
                 <div class="content">
+                    <img src="img/LOGO.png" alt="">
                     <h3>New here ?</h3>
                     <p>
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
@@ -169,10 +174,13 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
                         Sign up
                     </button>
                 </div>
-                <img src="img/log.svg" class="image" alt="" />
+
+                <img src="img/audi1.png" class="image" alt="" />
+
             </div>
             <div class="panel right-panel">
                 <div class="content">
+                    <img src="img/LOGO.png" alt="">
                     <h3>One of us ?</h3>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
@@ -182,10 +190,14 @@ $check_email = mysqli_query($conn,"SELECT id FROM users WHERE email='$email' AND
                         Sign in
                     </button>
                 </div>
-                <img src="img/register.svg" class="image" alt="" />
+                <img src="img/audi.png" class="image" alt="" />
             </div>
         </div>
+
+
     </div>
+
+
 
     <script src="app.js"></script>
 </body>
