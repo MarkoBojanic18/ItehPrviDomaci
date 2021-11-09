@@ -248,12 +248,12 @@ if(!isset($_SESSION["user_id"])){
                             if(strcmp($imejl, $row["email"]) == 0):  ?>
                         <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
                             title="Edit" value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a href="#" id="btnDelete" formmethod="post" class="btn btn-danger deleteuser" data-userid="14"
-                            title="Delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                        <a href="#" id="btnDelete" onclick="check()" formmethod="post" class="btn btn-danger deleteuser"
+                            data-userid="14" title="Delete"><i class="fa fa-trash-o fa-lg"></i></a>
                     </td>
                     <td>
                         <label class="custom-radio-btn">
-                            <input type="radio" name="checked-donut" value=<?php echo $row["id"] ?>>
+                            <input type="radio" id="box" name="checked-donut" value=<?php echo $row["id"] ?>>
                             <span class="checkmark"></span>
                         </label>
                     </td>

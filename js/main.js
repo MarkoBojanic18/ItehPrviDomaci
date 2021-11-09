@@ -30,6 +30,10 @@ $('#addform').submit(function () {
     });
 });
 
+function check() {
+    document.getElementById("box").checked = true;
+}
+
 
 $('#btnDelete').click(function () {
     if (confirm("Are you sure?")) {
