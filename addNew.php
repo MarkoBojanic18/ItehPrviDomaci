@@ -1,20 +1,22 @@
 <?php
 
+require "config.php";
+
 class AddNew{
     public $id;
     public $carName;
     public $userName;
     public $email;
-    public $photo;
+    public $date;
     public $price;
 
-    public function __construct($id = null, $carName = null, $userName = null, $email = null, $photo = null, $price = null){
-        $this->$id = $id;
-        $this->$carName = $carName;
-        $this->$userName = $userName;
-        $this->$email = $email;
-        $this->$photo = $photo;
-        $this->$price = $price;
+    public function __construct($id = null, $carName = null, $userName =null , $email = null, $date =null , $price = null){
+        $this->id = $id;
+        $this->carName = $carName;
+        $this->userName = $userName;
+        $this->email = $email;
+        $this->date = $date;
+        $this->price = $price;
     }
 
     public static function getAll(mysqli $conn){
@@ -42,12 +44,12 @@ class AddNew{
 
     public static function add(AddNew $addNew, mysqli $conn)
     {
-        $query = "INSERT INTO cars(carName,userName,email,photo,price) VALUES('$addNew->carName','$addNew->userName','$addNew->email','$addNew->photo','$addNew->price')";
-        return $conn->query($query);
+        $q = "INSERT INTO cars(carName,userName,email,date,price) VALUES('$addNew->carName','$addNew->userName','$addNew->email','$addNew->date','$addNew->price')";
+        return $conn->query($q);
     }
 
     public static function update(mysqli $conn){
-        $query = "UPDATE cars SET carName = $this->carName', userName = '$this->userName', email='$this->email',photo = '$this->photo',price='$this->price'";
+        $query = "UPDATE cars SET carName = $this->carName', userName = '$this->userName', email='$this->email',date = '$this->date',price='$this->price'";
         return $conn->query($query);
     }
 }

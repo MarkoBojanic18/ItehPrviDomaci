@@ -2,6 +2,8 @@
 
 require "config.php";
 require  "addNew.php";
+require "user.php";
+error_reporting(0);
 
 session_start();
 
@@ -11,6 +13,7 @@ if(!isset($_SESSION["user_id"])){
   }
 
   $result = addNew::getAll($conn);
+  
 
   if(!$result){
     echo "<script>alert('Error occurs! Problem is connected with the car base');</script>";
@@ -69,7 +72,7 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
                                                 aria-hidden="true"></i>
                                     </div>
-                                    <input type="text" class="form-control" id="username" name="carName"
+                                    <input type="text" class="form-control" id="carName" name="carName"
                                         required="required">
                                 </div>
                             </div>
@@ -80,7 +83,7 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" id="email" name="userName"
+                                    <input type="text" class="form-control" id="userName" name="userName"
                                         required="required">
                                 </div>
                             </div>
@@ -91,8 +94,8 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="phone" class="form-control" id="phone" name="email" required="required"
-                                        maxLength="10" minLength="10">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        required="required">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -102,20 +105,20 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="phone" class="form-control" id="phone" name="price" required="required"
-                                        maxLength="10" minLength="10">
+                                    <input type="text" class="form-control" id="price" name="price" required="required"
+                                        maxLength="" minLength="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Photo:</label>
+                                <label for="message-text" class="col-form-label">Date of production:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01"><i
                                                 class="fa fa-picture-o" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="photo" id="userphoto">
-                                        <label class="custom-file-label" for="userphoto">Choose file</label>
+                                        <input type="date" id="date" name="date" class="form-control"
+                                            required="required" />
                                     </div>
                                 </div>
 
@@ -184,8 +187,8 @@ if(!isset($_SESSION["user_id"])){
 
             <div class="col-3">
                 <a href="logout.php" class="link">Logout</a>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Add New <i
-                        class="fa fa-user-circle-o"></i></button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Add
+                    New <i class="fa fa-user-circle-o"></i></button>
             </div>
             <div class="col-9">
                 <div class="input-group input-group-lg">
@@ -208,7 +211,7 @@ if(!isset($_SESSION["user_id"])){
         <table class="table" id="userstable">
             <thead>
                 <tr>
-                    <th scope="col"></th>
+                    <th scope="col">Date of production</th>
                     <th scope="col">Car model and name</th>
                     <th scope="col">User name</th>
                     <th scope="col">Email</th>
@@ -221,8 +224,7 @@ if(!isset($_SESSION["user_id"])){
                     while($row=$result->fetch_array()):
                 ?>
                 <tr>
-                    <td class="align-middle"><?php echo $row["photo"] ?><img src="http://placehold.it/80x80"
-                            class="img-thumbnail rounded float-left"></td>
+                    <td class="align-middle"><?php echo $row["date"] ?></td>
                     <td class="align-middle"><?php echo $row["carName"] ?></td>
                     <td class="align-middle"><?php echo $row["userName"] ?></td>
                     <td class="align-middle"><?php echo $row["email"] ?></td>
@@ -232,7 +234,16 @@ if(!isset($_SESSION["user_id"])){
                         <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
                             data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
                                 aria-hidden="true"></i></a>
-                        <?php if($_SESSION["user_id"] == $row["id"]): ?>
+                        <?php 
+                        $result1 = User::getAll($conn);
+                            $imejl = "";
+                            while($raw = $result1->fetch_array()){
+                                if($raw["id"] == $_SESSION["user_id"]){  
+                                    $imejl = $raw["email"];
+                                }
+                            }
+                    
+                            if(strcmp($imejl, $row["email"]) == 0):  ?>
                         <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
                             title="Edit" value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
                         <a href="#" class="btn btn-danger deleteuser" data-userid="14" title="Delete"><i
@@ -277,11 +288,16 @@ if(!isset($_SESSION["user_id"])){
         <br />
         Loading...
     </div>
+
+    <script src="js/main.js"></script>
+    <script>
+    $(document).ready(function() {
+        // $('#overlay').fadeIn().delay(2000).fadeOut();
+    });
+    </script>
+
 </body>
-<script>
-$(document).ready(function() {
-    // $('#overlay').fadeIn().delay(2000).fadeOut();
-});
-</script>
+
+
 
 </html>
