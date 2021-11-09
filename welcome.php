@@ -69,7 +69,7 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
                                                 aria-hidden="true"></i>
                                     </div>
-                                    <input type="text" class="form-control" id="username" name="username"
+                                    <input type="text" class="form-control" id="username" name="carName"
                                         required="required">
                                 </div>
                             </div>
@@ -80,7 +80,7 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" id="email" name="email"
+                                    <input type="email" class="form-control" id="email" name="userName"
                                         required="required">
                                 </div>
                             </div>
@@ -91,7 +91,7 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="phone" class="form-control" id="phone" name="phone" required="required"
+                                    <input type="phone" class="form-control" id="phone" name="email" required="required"
                                         maxLength="10" minLength="10">
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="phone" class="form-control" id="phone" name="phone" required="required"
+                                    <input type="phone" class="form-control" id="phone" name="price" required="required"
                                         maxLength="10" minLength="10">
                                 </div>
                             </div>
