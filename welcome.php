@@ -155,14 +155,14 @@ if(!isset($_SESSION["user_id"])){
                         <div class="container" id="profile">
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
-                                    <img src="http://placehold.it/100x100" alt="" class="rounded responsive" />
+                                    <img src="http://placehold.it/100x100" id="Img" alt="" class="rounded responsive" />
                                 </div>
                                 <div class="col-sm-6 col-md-8">
-                                    <h4 class="text-primary">Virat Kohli</h4>
+                                    <h4 id="UserName" class="text-primary"></h4>
                                     <p class="text-secondary">
-                                        <i class="fa fa-envelope-o" aria-hidden="true"></i> email@example.com
+                                        <i id="Email" class="fa fa-envelope-o" aria-hidden="true"></i>
                                         <br />
-                                        <i class="fa fa-phone" aria-hidden="true"></i> xxxxxxxxxx
+                                        <i class="fa fa-phone" id="Price" aria-hidden="true"></i>
                                     </p>
                                     <!-- Split button -->
                                 </div>
@@ -189,6 +189,13 @@ if(!isset($_SESSION["user_id"])){
                 <a href="logout.php" class="link">Logout</a>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Add
                     New <i class="fa fa-user-circle-o"></i></button>
+                <button type="button" onclick="sortTable()" class="btn btn-primary">Sort </button>
+                <label for="sort">Choose a criteria:</label>
+                <select name="criteria" id="criteria" class="criteria">
+                    <option value="price">Price</option>
+                    <option value="date">Date</option>
+                    <option value="date">CarName</option>
+                </select>
             </div>
             <div class="col-9">
                 <div class="input-group input-group-lg">
@@ -226,10 +233,10 @@ if(!isset($_SESSION["user_id"])){
                 ?>
                 <tr>
                     <td class="align-middle"><?php echo $row["date"] ?></td>
-                    <td class="align-middle"><?php echo $row["carName"] ?></td>
-                    <td class="align-middle"><?php echo $row["userName"] ?></td>
-                    <td class="align-middle"><?php echo $row["email"] ?></td>
-                    <td class="align-middle"><?php echo $row["price"] ?> euro/h</td>
+                    <td id="CarName" class="align-middle"><?php echo $row["carName"] ?></td>
+                    <td id="Username" class="align-middle"><?php echo $row["userName"] ?></td>
+                    <td id="EmaIL" class="align-middle"><?php echo $row["email"] ?></td>
+                    <td id="PriCe" class="align-middle"><?php echo $row["price"] ?> euro/h</td>
 
                     <td class="align-middle">
                         <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
@@ -314,23 +321,71 @@ if(!isset($_SESSION["user_id"])){
         table = document.getElementById("myTable");
         switching = true;
 
-        while (switching) {
-            switching = false;
-            rows = table.rows;
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-                x = rows[i].getElementsByTagName("TD")[1];
-                y = rows[i + 1].getElementsByTagName("TD")[1];
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
+        var e = document.getElementById("criteria");
+        var result = e.options[e.selectedIndex].value;
+        if (result == "date") {
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[0];
+                    y = rows[i + 1].getElementsByTagName("TD")[0];
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
                 }
             }
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
+        }
+
+
+        if (result == "price") {
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[4];
+                    y = rows[i + 1].getElementsByTagName("TD")[4];
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
             }
         }
+
+
+        if (result == "carname") {
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[1];
+                    y = rows[i + 1].getElementsByTagName("TD")[1];
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+
+
     }
 
     function funkcijaZaPretragu() {
