@@ -221,20 +221,24 @@ if(!isset($_SESSION["user_id"])){
                     while($row=$result->fetch_array()):
                 ?>
                 <tr>
-                    <td class="align-middle"><?php echo $row["photo"] ?></td>
+                    <td class="align-middle"><?php echo $row["photo"] ?><img src="http://placehold.it/80x80"
+                            class="img-thumbnail rounded float-left"></td>
                     <td class="align-middle"><?php echo $row["carName"] ?></td>
                     <td class="align-middle"><?php echo $row["userName"] ?></td>
                     <td class="align-middle"><?php echo $row["email"] ?></td>
                     <td class="align-middle"><?php echo $row["price"] ?> euro/h</td>
+
                     <td class="align-middle">
                         <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
                             data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
                                 aria-hidden="true"></i></a>
+                        <?php if($_SESSION["user_id"] == $row["id"]): ?>
                         <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
                             title="Edit" value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
                         <a href="#" class="btn btn-danger deleteuser" data-userid="14" title="Delete"><i
                                 class="fa fa-trash-o fa-lg"></i></a>
                     </td>
+                    <?php endif ?>
                 </tr>
 
                 <?php 
