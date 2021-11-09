@@ -234,6 +234,8 @@ if(!isset($_SESSION["user_id"])){
                         <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
                             data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
                                 aria-hidden="true"></i></a>
+
+                        <!-- Naredni php kod omogucava da korisnik moze da menja i brise samo one postove koji su napravljeni sa naloga koji je trenutno ulogovan ! -->
                         <?php 
                         $result1 = User::getAll($conn);
                             $imejl = "";
@@ -246,8 +248,14 @@ if(!isset($_SESSION["user_id"])){
                             if(strcmp($imejl, $row["email"]) == 0):  ?>
                         <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
                             title="Edit" value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a href="#" class="btn btn-danger deleteuser" data-userid="14" title="Delete"><i
-                                class="fa fa-trash-o fa-lg"></i></a>
+                        <a href="#" id="btnDelete" formmethod="post" class="btn btn-danger deleteuser" data-userid="14"
+                            title="Delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                    </td>
+                    <td>
+                        <label class="custom-radio-btn">
+                            <input type="radio" name="checked-donut" value=<?php echo $row["id"] ?>>
+                            <span class="checkmark"></span>
+                        </label>
                     </td>
                     <?php endif ?>
                 </tr>
@@ -264,7 +272,7 @@ if(!isset($_SESSION["user_id"])){
 
 
 
-        <nav id="pagination">
+        <nav id=" pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>

@@ -37,8 +37,9 @@ class AddNew{
         return $myArray;
     }
 
-    public static function deleteById(mysqli $conn){
-        $query = "DELETE FROM cars WHERE id = $this->id";
+    public function deleteById(mysqli $conn)
+    {
+        $query = "DELETE FROM cars WHERE id=$this->id";
         return $conn->query($query);
     }
 

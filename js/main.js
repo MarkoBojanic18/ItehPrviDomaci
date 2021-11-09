@@ -29,3 +29,31 @@ $('#addform').submit(function () {
         console.error('Error message: ' + textStatus, errorThrown);
     });
 });
+
+
+$('#btnDelete').click(function () {
+    if (confirm("Are you sure?")) {
+        console.log("Brisanje");
+
+        const checked = $('input[name=checked-donut]:checked');
+
+        req = $.ajax({
+            url: 'handler/delete.php',
+            type: 'post',
+            data: { 'id': checked.val() }
+        });
+
+        req.done(function (res, textStatus, jqXHR) {
+            if (res == "Success") {
+                checked.closest('tr').remove();
+                alert('Your car post is successfully deleted');
+                console.log('Obrisan');
+            } else {
+                console.log("Your car post is NOT deleted " + res);
+                alert("Your car post is NOT deleted ");
+
+            }
+            console.log(res);
+        });
+    }
+});
