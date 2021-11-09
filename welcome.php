@@ -1,14 +1,27 @@
 <?php
 
+require "config.php";
+require  "addNew.php";
+
 session_start();
 
 if(!isset($_SESSION["user_id"])){
     header("Location: index.php");
+    exit();
   }
 
-echo $_SESSION["user_id"];
+  $result = addNew::getAll($conn);
 
+  if(!$result){
+    echo "<script>alert('Error occurs! Problem is connected with the car base');</script>";
+    die();
+  }
 
+  if($result->num_rows == 0){
+      echo "There is no cars for promotion";
+      die();
+  }
+  else{
 
 ?>
 
@@ -33,7 +46,9 @@ echo $_SESSION["user_id"];
         <div class="alert alert alert-primary" role="alert">
             <h4 class="text-primary text-center">Find your own place and win the world!</h4>
         </div>
+
         <!-- add/edit form modal -->
+
         <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -48,7 +63,7 @@ echo $_SESSION["user_id"];
                     <form id="addform" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Name:</label>
+                                <label for="recipient-name" class="col-form-label">Car model and mark:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
@@ -59,7 +74,7 @@ echo $_SESSION["user_id"];
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Email:</label>
+                                <label for="message-text" class="col-form-label">User name:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
@@ -70,7 +85,18 @@ echo $_SESSION["user_id"];
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Phone:</label>
+                                <label for="message-text" class="col-form-label">Email:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="phone" class="form-control" id="phone" name="phone" required="required"
+                                        maxLength="10" minLength="10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Price:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
@@ -107,6 +133,9 @@ echo $_SESSION["user_id"];
             </div>
         </div>
         <!-- add/edit form modal end -->
+
+
+
         <!-- profile modal start -->
         <div class="modal fade" id="userViewModal" tabindex="-1" role="dialog" aria-labelledby="userViewModalLabel"
             aria-hidden="true">
@@ -145,7 +174,11 @@ echo $_SESSION["user_id"];
                 </div>
             </div>
         </div>
+
         <!-- profile modal end -->
+
+
+
 
         <div class="row mb-3">
 
@@ -168,84 +201,54 @@ echo $_SESSION["user_id"];
             </div>
 
         </div>
+
+
+
         <!-- table -->
         <table class="table" id="userstable">
             <thead>
                 <tr>
                     <th scope="col"></th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Car model and name</th>
+                    <th scope="col">User name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
+                    <th scope="col">Price</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    while($row=$result->fetch_array()):
+                ?>
                 <tr>
-                    <td class="align-middle"><img src="http://placehold.it/80x80"
-                            class="img-thumbnail rounded float-left"></td>
-                    <td class="align-middle">Virat Kohli</td>
-                    <td class="align-middle">virat@example.com</td>
-                    <td class="align-middle">xxxxxxxxxx</td>
+                    <td class="align-middle"><?php echo $row["photo"] ?></td>
+                    <td class="align-middle"><?php echo $row["carName"] ?></td>
+                    <td class="align-middle"><?php echo $row["userName"] ?></td>
+                    <td class="align-middle"><?php echo $row["email"] ?></td>
+                    <td class="align-middle"><?php echo $row["price"] ?> euro/h</td>
                     <td class="align-middle">
                         <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
                             data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
                                 aria-hidden="true"></i></a>
                         <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
-                            title="Edit"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                            title="Edit" value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
                         <a href="#" class="btn btn-danger deleteuser" data-userid="14" title="Delete"><i
                                 class="fa fa-trash-o fa-lg"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td class="align-middle"><img src="http://placehold.it/80x80"
-                            class="img-thumbnail rounded float-left"></td>
-                    <td class="align-middle">MS Dhoni</td>
-                    <td class="align-middle">dhoni@example.com</td>
-                    <td class="align-middle">xxxxxxxxxx</td>
-                    <td class="align-middle">
-                        <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
-                            data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
-                                aria-hidden="true"></i></a>
-                        <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
-                            title="Edit"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a href="#" class="btn btn-danger deleteuser" title="Delete"><i
-                                class="fa fa-trash-o fa-lg"></i></a>
-                    </td>
-                </tr>
-                <tr id="row-9">
-                    <td class="align-middle"><img src="http://placehold.it/80x80"
-                            class="img-thumbnail rounded float-left"></td>
-                    <td class="align-middle">Sachin Tendulkar</td>
-                    <td class="align-middle">sachin@example.com</td>
-                    <td class="align-middle">xxxxxxxxxx</td>
-                    <td class="align-middle">
-                        <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
-                            data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
-                                aria-hidden="true"></i></a>
-                        <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
-                            title="Edit"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a href="#" class="btn btn-danger deleteuser" title="Delete"><i
-                                class="fa fa-trash-o fa-lg"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="align-middle"><img src="http://placehold.it/80x80"
-                            class="img-thumbnail rounded float-left"></td>
-                    <td class="align-middle">Rohit Sharma</td>
-                    <td class="align-middle">rohit@example.com</td>
-                    <td class="align-middle">xxxxxxxxxx</td>
-                    <td class="align-middle">
-                        <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
-                            data-target="#userViewModal" title="Prfile"><i class="fa fa-address-card-o"
-                                aria-hidden="true"></i></a>
-                        <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
-                            title="Edit"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a href="#" class="btn btn-danger deleteuser" title="Delete"><i
-                                class="fa fa-trash-o fa-lg"></i></a>
-                    </td>
-                </tr>
+
+                <?php 
+                endwhile;
+            }
+                ?>
+
             </tbody>
-        </table><!-- table -->
+        </table>
+
+        <!-- table -->
+
+
+
         <nav id="pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
