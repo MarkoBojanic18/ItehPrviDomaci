@@ -12,6 +12,8 @@ if(!isset($_SESSION["user_id"])){
     exit();
   }
 
+  
+
   $result = addNew::getAll($conn);
   
 
@@ -45,6 +47,36 @@ if(!isset($_SESSION["user_id"])){
 </head>
 
 <body>
+    <div id="loginUserContainer" class="loginUserContainer">
+        <div id="loginUserPicture" class="loginUserPicture">
+            <img src="img/user.png" alt="">
+        </div>
+        <div id="loginUser" class="loginUser">
+            <h1><?php 
+            $result1 = User::getAll($conn);
+            $ime = "";
+            while($raw = $result1->fetch_array()){
+                if($raw["id"] == $_SESSION["user_id"]){  
+                    $ime = $raw["full_name"];
+                }
+            }
+                echo $ime;
+              ?></h1>
+            <h3><?php 
+            $result1 = User::getAll($conn);
+            $imejl = "";
+            while($raw = $result1->fetch_array()){
+                if($raw["id"] == $_SESSION["user_id"]){  
+                    $imejl = $raw["email"];
+                }
+            }
+                echo $imejl;
+              ?></h3>
+        </div>
+        <div>
+
+        </div>
+    </div>
     <div class="container">
         <div class="alert alert alert-primary" role="alert">
             <h4 class="text-primary text-center">Find your own place and win the world!</h4>
