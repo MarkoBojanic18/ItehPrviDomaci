@@ -5,10 +5,11 @@ require "../addNew.php";
 
 
 
-if(isset($_POST['id']) && isset($_POST['carName']) && isset($_POST['userName']) && isset($_POST['email']) 
-&& isset($_POST['price']) && isset($_POST['date'])){
-    $obj = new AddNew($_POST['id'], $_POST['carName'],$_POST['userName'],$_POST['email'], $_POST['date'], $_POST['price']);
-    $status = $obj->update($conn);
+if(isset($_POST['id']) && isset($_POST['carNameEdit']) && isset($_POST['userNameEdit']) && isset($_POST['emailEdit']) 
+&& isset($_POST['priceEdit']) && isset($_POST['dateEdit'])){
+    $obj = new AddNew(null, $_POST['carNameEdit'],$_POST['userNameEdit'],$_POST['emailEdit'], $_POST['dateEdit'], $_POST['priceEdit']);
+    $id = $_POST['id'];
+    $status = $obj->update($id,$conn);
     
     if($status){
         echo "Success";
