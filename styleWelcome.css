@@ -25,20 +25,6 @@ body{
     opacity: .80;
   }
 
-  .link{
-    color:white; 
-    background-color: rgb(32, 123, 241); 
-    margin-right: 8px;
-    padding: 9px;
-    border-radius: 5px;
-    text-decoration: none;
-  }
-
-  .link:hover{
-      background-color: red;
-      color:white;
-      text-decoration: none;
-  }
 
   .criteria{
     margin-top: 8px;

@@ -62,7 +62,8 @@ if(!isset($_SESSION["user_id"])){
             }
                 echo $ime;
               ?></h1>
-            <h3><?php 
+
+            <h3 id="imejl"><?php 
             $result1 = User::getAll($conn);
             $imejl = "";
             while($raw = $result1->fetch_array()){
@@ -82,14 +83,15 @@ if(!isset($_SESSION["user_id"])){
             <h4 class="text-primary text-center">Find your own place and win the world!</h4>
         </div>
 
-        <!-- add/edit form modal -->
 
-        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+
+        <!-- ADD form modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add/Edit User <i class="fa fa-user-circle-o"
+                        <h5 class="modal-title" id="exampleModalLabel">Add User <i class="fa fa-user-circle-o"
                                 aria-hidden="true"></i></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -116,7 +118,16 @@ if(!isset($_SESSION["user_id"])){
                                                 aria-hidden="true"></i></span>
                                     </div>
                                     <input type="text" class="form-control" id="userName" name="userName"
-                                        required="required">
+                                        required="required" value=<?php 
+            $result1 = User::getAll($conn);
+            $ime = "";
+            while($raw = $result1->fetch_array()){
+                if($raw["id"] == $_SESSION["user_id"]){  
+                    $ime = $raw["full_name"];
+                }
+            }
+                echo $ime;
+              ?>>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -126,8 +137,17 @@ if(!isset($_SESSION["user_id"])){
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        required="required">
+                                    <input type="email" class="form-control" id="email" name="email" required="required"
+                                        value="<?php 
+            $result1 = User::getAll($conn);
+            $imejl = "";
+            while($raw = $result1->fetch_array()){
+                if($raw["id"] == $_SESSION["user_id"]){  
+                    $imejl = $raw["email"];
+                }
+            }
+                echo $imejl;
+              ?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -167,7 +187,125 @@ if(!isset($_SESSION["user_id"])){
                 </div>
             </div>
         </div>
-        <!-- add/edit form modal end -->
+        <!-- ADD form modal end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- EDIT form modal -->
+
+        <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit User <i class="fa fa-user-circle-o"
+                                aria-hidden="true"></i></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="editform" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Car model and mark:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
+                                                aria-hidden="true"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="carName" name="carName"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">User name:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="userName" name="userName"
+                                        required="required" value=<?php 
+            $result1 = User::getAll($conn);
+            $ime = "";
+            while($raw = $result1->fetch_array()){
+                if($raw["id"] == $_SESSION["user_id"]){  
+                    $ime = $raw["full_name"];
+                }
+            }
+                echo $ime;
+              ?>>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Email:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" id="email" name="email" required="required"
+                                        value="<?php 
+            $result1 = User::getAll($conn);
+            $imejl = "";
+            while($raw = $result1->fetch_array()){
+                if($raw["id"] == $_SESSION["user_id"]){  
+                    $imejl = $raw["email"];
+                }
+            }
+                echo $imejl;
+              ?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Price:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="price" name="price" required="required"
+                                        maxLength="" minLength="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Date of production:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01"><i
+                                                class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="date" id="date" name="date" class="form-control"
+                                            required="required" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" id="addButton">Submit</button>
+                            <input type="hidden" name="action" value="adduser">
+                            <input type="hidden" name="userid" id="userid" value="adduser">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- EDIT form modal end -->
 
 
 
@@ -218,15 +356,17 @@ if(!isset($_SESSION["user_id"])){
         <div class="row mb-3">
 
             <div class="col-3">
-                <a href="logout.php" class="link">Logout</a>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Add
+                <!-- <a href="logout.php" class="link">Logout</a> -->
+                <button type="button" id="btnLogout" class="btn btn-primary">Logout </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add
                     New <i class="fa fa-user-circle-o"></i></button>
                 <button type="button" onclick="sortTable()" class="btn btn-primary">Sort </button>
                 <label for="sort">Choose a criteria:</label>
                 <select name="criteria" id="criteria" class="criteria">
+                    <option value="myposts">My Posts</option>
                     <option value="price">Price</option>
                     <option value="date">Date</option>
-                    <option value="date">CarName</option>
+                    <option value="carname">Car Name</option>
                 </select>
             </div>
             <div class="col-9">
@@ -255,7 +395,7 @@ if(!isset($_SESSION["user_id"])){
                     <th scope="col">Car model and name</th>
                     <th scope="col">User name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Price( euro/h)</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -268,7 +408,7 @@ if(!isset($_SESSION["user_id"])){
                     <td id="CarName" class="align-middle"><?php echo $row["carName"] ?></td>
                     <td id="Username" class="align-middle"><?php echo $row["userName"] ?></td>
                     <td id="EmaIL" class="align-middle"><?php echo $row["email"] ?></td>
-                    <td id="PriCe" class="align-middle"><?php echo $row["price"] ?> euro/h</td>
+                    <td id="PriCe" class="align-middle"><?php echo $row["price"] ?></td>
 
                     <td class="align-middle">
                         <a href="#" class="btn btn-success mr-3 profile" data-toggle="modal"
@@ -286,8 +426,9 @@ if(!isset($_SESSION["user_id"])){
                             }
                     
                             if(strcmp($imejl, $row["email"]) == 0):  ?>
-                        <a href="#" class="btn btn-warning mr-3 edituser" data-toggle="modal" data-target="#userModal"
-                            title="Edit" value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                        <a href="#" id="btnChange" onclick="check()" class="btn btn-warning mr-3 edituser"
+                            data-toggle="modal" data-target="#changeModal" title="Edit"
+                            value=<?php echo $row["id"] ?>><i class="fa fa-pencil-square-o fa-lg"></i></a>
                         <a href="#" id="btnDelete" onclick="check()" formmethod="post" class="btn btn-danger deleteuser"
                             data-userid="14" title="Delete"><i class="fa fa-trash-o fa-lg"></i></a>
                     </td>
@@ -349,75 +490,91 @@ if(!isset($_SESSION["user_id"])){
 
     <script>
     function sortTable() {
-        var table, rows, switching, i, x, y, shouldSwitch;
+        var table, rows, switching, i, j, z, k, x, y, shouldSwitch;
         table = document.getElementById("myTable");
         switching = true;
+        var newrows;
 
         var e = document.getElementById("criteria");
         var result = e.options[e.selectedIndex].value;
+        var p = document.getElementById("imejl").innerHTML;
+
+        //SORT my posts
+        // sortira tako da uvek budu postovi osobe koja je ulogovana na vrhu pa onda svi ostali ispod
+        if (result == "myposts") {
+            rows = table.rows;
+            for (i = 1; i < rows.length; i++) {
+                x = rows[i].getElementsByTagName("TD")[3];
+                if (x.innerHTML == p) {
+                    for (j = 1; j < (rows.length - 1); j++) {
+                        if (rows[j] != p) {
+                            rows[j].parentNode.insertBefore(rows[i], rows[j]);
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        //SORT po datumu
+        // sortira tako da najsveziji datumu idu prvi 
         if (result == "date") {
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                for (j = i + 1; j < rows.length; j++) {
                     x = rows[i].getElementsByTagName("TD")[0];
-                    y = rows[i + 1].getElementsByTagName("TD")[0];
+                    y = rows[j].getElementsByTagName("TD")[0];
+
                     if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
+                        rows[i].parentNode.insertBefore(rows[j], rows[i]);
                     }
-                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
                 }
             }
         }
 
 
+
+        //SORT po ceni
+        // sortira tako da najjeftiniji postovi idu na vrh
         if (result == "price") {
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                for (j = i + 1; j < rows.length; j++) {
                     x = rows[i].getElementsByTagName("TD")[4];
-                    y = rows[i + 1].getElementsByTagName("TD")[4];
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
+                    y = rows[j].getElementsByTagName("TD")[4];
+                    z = parseInt(x.innerHTML);
+                    k = parseInt(y.innerHTML);
+                    if (z > k) {
+                        rows[i].parentNode.insertBefore(rows[j], rows[i]);
                     }
                 }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                }
             }
+
         }
 
 
+        //SORT po imenu automobila
+        //sortiranje vrsi po ASCII kodu
         if (result == "carname") {
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                for (j = i + 1; j < rows.length; j++) {
                     x = rows[i].getElementsByTagName("TD")[1];
-                    y = rows[i + 1].getElementsByTagName("TD")[1];
+                    y = rows[j].getElementsByTagName("TD")[1];
+
                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
+                        rows[i].parentNode.insertBefore(rows[j], rows[i]);
                     }
-                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
                 }
             }
         }
 
 
+    }
+
+    document.getElementById('btnLogout').onclick = function() {
+        window.location.href = "logout.php";
     }
 
     function funkcijaZaPretragu() {
