@@ -99,7 +99,6 @@ if(!isset($_SESSION["user_id"])){
                 <button type="button" onclick="sortTable()" class="btn btn-primary">Sort </button>
                 <label for="sort">Choose a criteria:</label>
                 <select name="criteria" id="criteria" class="criteria">
-                    <option value="myposts">My Posts</option>
                     <option value="price">Price</option>
                     <option value="date">Date</option>
                     <option value="carname">Car Name</option>
@@ -459,23 +458,7 @@ if(!isset($_SESSION["user_id"])){
         var result = e.options[e.selectedIndex].value;
         var p = document.getElementById("imejl").innerHTML;
 
-        //SORT my posts
-        // sortira tako da uvek budu postovi osobe koja je ulogovana na vrhu pa onda svi ostali ispod
-        if (result == "myposts") {
-            rows = table.rows;
-            for (i = 1; i < rows.length; i++) {
-                x = rows[i].getElementsByTagName("TD")[3];
-                if (x.innerHTML == p) {
-                    for (j = 1; j < (rows.length - 1); j++) {
-                        if (rows[j] != p) {
-                            rows[j].parentNode.insertBefore(rows[i], rows[j]);
-                            break;
-                        }
-                    }
-                }
 
-            }
-        }
 
         //SORT po datumu
         // sortira tako da najsveziji datumu idu prvi 
