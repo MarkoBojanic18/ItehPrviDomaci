@@ -254,7 +254,7 @@ $('#editform').submit(function () {
     $('#changeModal').modal('hide');
 });
 
-/*
+
 $('#btn-pretraga').click(function () {
 
     var para = document.querySelector('#myInput');
@@ -283,7 +283,7 @@ $('#btnIzmeni').submit(function () {
     $('#myModal').modal('toggle');
     return false;
 });
-*/
+
 
 
 
