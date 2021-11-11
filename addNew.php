@@ -51,7 +51,8 @@ class AddNew{
 
     public function update($id, mysqli $conn)
     {
-        $query = "UPDATE cars set carName = $this->carName,userName = $this->userName,email = $this->email,date = $this->date,price = $this->price  WHERE id=$id";
+        $query = "UPDATE cars set carName = '$this->carName',userName = '$this->userName',email = '$this->email',date = '$this->date',price = '$this->price' WHERE id='$id'";
+
         return $conn->query($query);
     }
 }

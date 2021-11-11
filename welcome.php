@@ -300,71 +300,76 @@ if(!isset($_SESSION["user_id"])){
                     <form id="editform" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Car model and mark:</label>
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
-                                                aria-hidden="true"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="carNameEdit" name="carNameEdit"
-                                        required="required">
+                                    <input id="id" type="text" name="id" class="form-control" placeholder="Id *"
+                                        value="" readonly />
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">User name:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
-                                                aria-hidden="true"></i></span>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Car model and mark:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="carNameEdit" name="carNameEdit"
+                                            required="required">
                                     </div>
-                                    <input type="text" class="form-control" id="userNameEdit" name="userNameEdit"
-                                        required="required" />
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Email:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
-                                                aria-hidden="true"></i></span>
-                                    </div>
-                                    <input type="email" class="form-control" id="emailEdit" name="emailEdit"
-                                        required="required" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Price:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
-                                                aria-hidden="true"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" id="priceEdit" name="priceEdit"
-                                        required="required" maxLength="" minLength="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Date of production:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01"><i
-                                                class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="date" id="dateEdit" name="dateEdit" class="form-control"
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">User name:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
+                                                    aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="userNameEdit" name="userNameEdit"
                                             required="required" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Email:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                                    aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" id="emailEdit" name="emailEdit"
+                                            required="required" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Price:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                                    aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="priceEdit" name="priceEdit"
+                                            required="required" maxLength="" minLength="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Date of production:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupFileAddon01"><i
+                                                    class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="date" id="dateEdit" name="dateEdit" class="form-control"
+                                                required="required" />
+                                        </div>
+                                    </div>
+
+                                </div>
 
                             </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success" id="addButton">Submit</button>
-                            <input type="hidden" name="action" value="adduser">
-                            <input type="hidden" name="userid" id="userid" value="adduser">
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" id="addButton">Submit</button>
+                                <input type="hidden" name="action" value="adduser">
+                                <input type="hidden" name="userid" id="userid" value="adduser">
+                            </div>
                     </form>
                 </div>
             </div>

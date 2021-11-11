@@ -35,6 +35,7 @@ function check() {
 }
 
 
+/*
 function proveri() {
     const checked = $('input[name=checked-donut]:checked');
     //pristupa informacijama te konkretne forme i popunjava dijalog
@@ -75,41 +76,36 @@ function proveri() {
     });
 
 }
+*/
 
 
 
 
 
 $('#btnDelete').click(function () {
-    proveri();
-    var trenutni = document.getElementById("nebitno").innerHTML;
-    var ulogovani = document.getElementById("imejl").innerHTML;
-    if (trenutni == ulogovani) {
-        console.log("Brisanje");
+    console.log("Brisanje");
 
-        const checked = $('input[name=checked-donut]:checked');
+    const checked = $('input[name=checked-donut]:checked');
 
-        req = $.ajax({
-            url: 'handler/delete.php',
-            type: 'post',
-            data: { 'id': checked.val() }
-        });
+    req = $.ajax({
+        url: 'handler/delete.php',
+        type: 'post',
+        data: { 'id': checked.val() }
+    });
 
-        req.done(function (res, textStatus, jqXHR) {
-            if (res == "Success") {
-                checked.closest('tr').remove();
-                alert('Car post is successfully deleted!');
-                console.log('Deleted');
-            } else {
-                console.log("Car post is NOT deleted " + res);
-                alert("Car post is NOT deleted ");
+    req.done(function (res, textStatus, jqXHR) {
+        if (res == "Success") {
+            checked.closest('tr').remove();
+            alert('Car post is successfully deleted!');
+            console.log('Deleted');
+        } else {
+            console.log("Car post is NOT deleted " + res);
+            alert("Car post is NOT deleted ");
 
-            }
-            console.log(res);
-        });
-    } else {
-        alert("This is NOT your post");
-    }
+        }
+        console.log(res);
+    });
+
 
 
 });
@@ -201,6 +197,9 @@ $('#btnChange').click(function () {
         $('#date').val(response[0]['date'].trim());
         console.log(response[0]['date'].trim());
 
+        $('#price').val(response[0]['price'].trim());
+        console.log(response[0]['price'].trim());
+
         $('#id').val(checked.val());
 
         document.getElementById('carNameEdit').value = response[0]['carName'].trim();
@@ -216,9 +215,9 @@ $('#btnChange').click(function () {
 
 });
 
-/*
+
 //dugme za slanje UPDATE zahteva nakon popunjene forme
-$('#changeModal').submit(function () {
+$('#editform').submit(function () {
     event.preventDefault();
     console.log("Izmene");
     const $form = $(this);
@@ -228,16 +227,22 @@ $('#changeModal').submit(function () {
     $inputs.prop('disabled', true);
 
     // kreirati request za UPDATE handler
+    request = $.ajax({
+        url: 'handler/update.php',
+        type: 'post',
+        data: serializedData
+    })
 
     request.done(function (response, textStatus, jqXHR) {
 
 
-        if (response === 'Success') {
+        if (response === "Success") {
             console.log('Kolokvijum je izmenjen');
+            alert('Kolokvijum je izmenjen');
             location.reload(true);
-            //$('#izmeniForm').reset;
+            $('#editform').reset;
         }
-        else console.log('Kolokvijum nije izmenjen ' + response);
+        else console.log('Kolokvijum nije izmenjen /n' + response);
         console.log(response);
     });
 
@@ -246,9 +251,10 @@ $('#changeModal').submit(function () {
     });
 
 
-    //$('#izmeniModal').modal('hide');
+    $('#changeModal').modal('hide');
 });
 
+/*
 $('#btn-pretraga').click(function () {
 
     var para = document.querySelector('#myInput');
