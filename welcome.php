@@ -132,7 +132,7 @@ if(!isset($_SESSION["user_id"])){
                     <th scope="col">Car model and name</th>
                     <th scope="col">User name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Price( euro)</th>
+                    <th scope="col">Price(€)</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -152,6 +152,7 @@ if(!isset($_SESSION["user_id"])){
                             <span class="checkmark"></span>
                         </label>
                     </td>
+
 
 
                 </tr>
@@ -184,6 +185,52 @@ if(!isset($_SESSION["user_id"])){
 
 
 
+
+
+
+        <!-- profile modal start -->
+        <div class="modal fade" id="userViewModal" tabindex="-1" role="dialog" aria-labelledby="userViewModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Profile <i class="fa fa-user-circle-o"
+                                aria-hidden="true"></i></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container" id="profile">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <img src="http://placehold.it/100x100" id="Img" alt="" class="rounded responsive" />
+                                </div>
+                                <div class="col-sm-6 col-md-8">
+                                    <h4 id="UserName" class="text-primary"></h4>
+                                    <p class="text-secondary">
+                                        <i id="Email" class="fa fa-envelope-o" aria-hidden="true"></i>
+                                        <br />
+                                        <i id="Price" class="fa fa-phone" id="Price" aria-hidden="true"></i>
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- profile modal end -->
+
+
+
         <!-- ADD form modal -->
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
             aria-hidden="true">
@@ -202,7 +249,7 @@ if(!isset($_SESSION["user_id"])){
                                 <label for="recipient-name" class="col-form-label">Car model and mark:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
                                                 aria-hidden="true"></i>
                                     </div>
                                     <input type="text" class="form-control" id="carName" name="carName"
@@ -213,8 +260,8 @@ if(!isset($_SESSION["user_id"])){
                                 <label for="message-text" class="col-form-label">User name:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
-                                                aria-hidden="true"></i></span>
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o"
+                                                aria-hidden="true"></i>
                                     </div>
                                     <input type="text" class="form-control" id="userName" name="userName"
                                         required="required" />
@@ -224,7 +271,7 @@ if(!isset($_SESSION["user_id"])){
                                 <label for="message-text" class="col-form-label">Email:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
                                                 aria-hidden="true"></i></span>
                                     </div>
                                     <input type="email" class="form-control" id="email" name="email"
@@ -235,8 +282,8 @@ if(!isset($_SESSION["user_id"])){
                                 <label for="message-text" class="col-form-label">Price:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
-                                                aria-hidden="true"></i></span>
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-eur"
+                                                aria-hidden="true"></i>
                                     </div>
                                     <input type="text" class="form-control" id="price" name="price" required="required"
                                         maxLength="" minLength="">
@@ -247,7 +294,7 @@ if(!isset($_SESSION["user_id"])){
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01"><i
-                                                class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                                class="fa fa-calendar" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="custom-file">
                                         <input type="date" id="date" name="date" class="form-control"
@@ -307,8 +354,8 @@ if(!isset($_SESSION["user_id"])){
                                     <label for="recipient-name" class="col-form-label">Car model and mark:</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"><i
-                                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
+                                                    aria-hidden="true"></i>
                                         </div>
                                         <input type="text" class="form-control" id="carNameEdit" name="carNameEdit"
                                             required="required">
@@ -318,8 +365,8 @@ if(!isset($_SESSION["user_id"])){
                                     <label for="message-text" class="col-form-label">User name:</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
-                                                    aria-hidden="true"></i></span>
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
                                         </div>
                                         <input type="text" class="form-control" id="userNameEdit" name="userNameEdit"
                                             required="required" />
@@ -329,7 +376,7 @@ if(!isset($_SESSION["user_id"])){
                                     <label for="message-text" class="col-form-label">Email:</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="email" class="form-control" id="emailEdit" name="emailEdit"
@@ -340,7 +387,7 @@ if(!isset($_SESSION["user_id"])){
                                     <label for="message-text" class="col-form-label">Price:</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-eur"
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="text" class="form-control" id="priceEdit" name="priceEdit"
@@ -352,7 +399,7 @@ if(!isset($_SESSION["user_id"])){
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupFileAddon01"><i
-                                                    class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                                    class="fa fa-calendar" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="custom-file">
                                             <input type="date" id="dateEdit" name="dateEdit" class="form-control"
@@ -377,46 +424,17 @@ if(!isset($_SESSION["user_id"])){
 
 
 
-        <!-- profile modal start -->
-        <div class="modal fade" id="userViewModal" tabindex="-1" role="dialog" aria-labelledby="userViewModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Profile <i class="fa fa-user-circle-o"
-                                aria-hidden="true"></i></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container" id="profile">
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4">
-                                    <img src="http://placehold.it/100x100" id="Img" alt="" class="rounded responsive" />
-                                </div>
-                                <div class="col-sm-6 col-md-8">
-                                    <h4 id="UserName" class="text-primary"></h4>
-                                    <p class="text-secondary">
-                                        <i id="Email" class="fa fa-envelope-o" aria-hidden="true"></i>
-                                        <br />
-                                        <i id="Price" class="fa fa-phone" id="Price" aria-hidden="true"></i>
-                                    </p>
-                                    <!-- Split button -->
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <!-- profile modal end -->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -439,11 +457,11 @@ if(!isset($_SESSION["user_id"])){
     </div>
 
     <script src="js/main.js"></script>
-    <!-- <script>
+    <script>
     $(document).ready(function() {
-        // $('#overlay').fadeIn().delay(2000).fadeOut();
+        $('#overlay').fadeIn().delay(1000).fadeOut();
     });
-    </script> -->
+    </script>
 
 
 

@@ -35,51 +35,6 @@ function check() {
 }
 
 
-/*
-function proveri() {
-    const checked = $('input[name=checked-donut]:checked');
-    //pristupa informacijama te konkretne forme i popunjava dijalog
-    request = $.ajax({
-        url: 'handler/get.php',
-        type: 'post',
-        data: { 'id': checked.val() },
-        dataType: 'json'
-    });
-
-
-    request.done(function (response, textStatus, jqXHR) {
-        console.log('Popunjena');
-        $('#carName').val(response[0]['carName']);
-        console.log(response[0]['carName']);
-
-        $('#userName').val(response[0]['userName'].trim());
-        console.log(response[0]['userName'].trim());
-
-        $('#email').val(response[0]['email'].trim());
-        console.log(response[0]['email'].trim());
-
-        $('#date').val(response[0]['date'].trim());
-        console.log(response[0]['date'].trim());
-
-        $('#price').val(response[0]['price'].trim());
-        console.log(response[0]['price'].trim());
-
-        $('#id').val(checked.val());
-
-        document.getElementById("nebitno").innerHTML = response[0]['email'].trim();
-
-        console.log(response);
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown) {
-        console.error('The following error occurred: ' + textStatus, errorThrown);
-    });
-
-}
-*/
-
-
-
 
 
 $('#btnDelete').click(function () {
@@ -145,7 +100,7 @@ $('#btnPreview').click(function () {
 
         document.getElementById('UserName').innerHTML = response[0]['userName'].trim();
         document.getElementById('Email').innerHTML = "  " + response[0]['email'].trim();
-        document.getElementById('Price').innerHTML = "  " + response[0]['price'].trim() + " euros";
+        document.getElementById('Price').innerHTML = "  " + response[0]['price'].trim() + " €";
         if (response[0]['carName'].toUpperCase().includes("AUDI")) {
             document.getElementById("Img").src = 'img/audi_logo.png';
         } else if (response[0]['carName'].toUpperCase().includes("BMW")) {
@@ -237,12 +192,12 @@ $('#editform').submit(function () {
 
 
         if (response === "Success") {
-            console.log('Kolokvijum je izmenjen');
-            alert('Kolokvijum je izmenjen');
+            console.log('Car post is successfully changed');
+            alert('Car post is successfully changed');
             location.reload(true);
             $('#editform').reset;
         }
-        else console.log('Kolokvijum nije izmenjen /n' + response);
+        else console.log('Car post is NOT changed /n' + response);
         console.log(response);
     });
 
